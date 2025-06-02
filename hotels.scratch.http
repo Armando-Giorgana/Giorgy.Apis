@@ -1,0 +1,53 @@
+@port = 7282
+@url = https://localhost:{{port}}/front/hotels
+
+## Create a new hotel
+# @name CreateHotel
+
+POST {{url}}
+    ?generated-in=JetBrains Rider
+Content-Type: application/json
+
+{
+  "name": "Hotel California",
+  "enabled": true
+}
+
+> {% client.global.set("hotelId", response.body.id); %}
+###
+
+## Example request to retrieve hotels
+# @name ExampleRequest
+GET {{url}}
+    ?generated-in=JetBrains Rider
+
+###
+
+## Get a specific hotel by ID
+# @name GetHotelById
+GET {{url}}/{{hotelId}}
+    ?generated-in=JetBrains Rider
+
+###
+
+## Update a hotel
+# @name UpdateHotel
+PUT {{url}}/{{hotelId}}
+    ?generated-in=JetBrains Rider
+Content-Type: application/json
+
+{
+    "name": "Hotel California Updated",
+    "enabled": false
+}
+
+###
+
+## Delete a hotel
+# @name DeleteHotel
+DELETE {{url}}/{{hotelId}}
+    ?generated-in=JetBrains Rider
+
+> {% client.global.set("hotelId", null); %}
+
+###

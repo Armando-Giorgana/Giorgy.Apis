@@ -14,6 +14,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Hotels.Front.Services", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AG.Hotels.Front.Api", "Apis\AG.Hotels.Front.Api\AG.Hotels.Front.Api.csproj", "{54582F59-76C3-4D96-9470-A617CE9090A7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{907AC43A-F640-4F9F-B909-81EB354FFED9}"
+	ProjectSection(SolutionItems) = preProject
+		hotels.scratch.http = hotels.scratch.http
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,5 +56,6 @@ Global
 		{DE2EA620-BFC3-4329-AA7D-617E652B066A} = {3E7C2B83-F107-4FC3-967D-125D3B03D2CB}
 		{E96994BA-EECB-4FD4-A05B-FA6D0710CD17} = {3E7C2B83-F107-4FC3-967D-125D3B03D2CB}
 		{54582F59-76C3-4D96-9470-A617CE9090A7} = {3E7C2B83-F107-4FC3-967D-125D3B03D2CB}
+		{907AC43A-F640-4F9F-B909-81EB354FFED9} = {3E7C2B83-F107-4FC3-967D-125D3B03D2CB}
 	EndGlobalSection
 EndGlobal
