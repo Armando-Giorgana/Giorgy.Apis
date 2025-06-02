@@ -1,29 +1,54 @@
 ﻿using AG.Hotels.Front.Services.Interfaces;
 using AG.Repositories.SqlServer.Utils;
+using Microsoft.Extensions.Logging;
 
 namespace AG.Hotels.Front.Services;
 
 public abstract class BaseService<TKey, TModel, TRepository>(
-    TRepository repository
-    ) : IBaseService<TKey, TModel>
+    TRepository repository,
+    ILoggerFactory loggerFactory
+) : IBaseService<TKey, TModel>
     where TKey : struct
     where TModel : class
     where TRepository : IBaseRepository<TKey, TModel>
 {
-    protected readonly TRepository Repository = repository;
-    
-    public TModel? GetById(TKey id)
+    protected TRepository Repository { get; } = repository;
+    protected ILogger Logger { get;  } = loggerFactory.CreateLogger<BaseService<TKey, TModel, TRepository>>();
+
+    public virtual TModel? GetById(TKey id)
         => Repository.GetById(id);
     
-    public IList<TModel> GetAll()
+    public virtual IList<TModel> GetAll()
         => Repository.GetAll();
 
-    public TModel Create(TModel model)
-        => Repository.Create(model);
+    public virtual TModel Create(TModel model)
+    {
+        Logger.LogInformation("Creating new {model}", typeof(TModel).Name);
+        
+        var result = Repository.Create(model);
+        
+        Logger.LogInformation("New {model} created successfully", typeof(TModel).Name);
+        
+        return result;
+    }
 
-    public TModel Update(TModel model)
-        => Repository.Update(model);
+    public virtual TModel Update(TModel model)
+    {
+        Logger.LogInformation("Updating {model}", typeof(TModel).Name);
+        
+        var result = Repository.Update(model);
+        
+        Logger.LogInformation("{model} updated successfully", typeof(TModel).Name);
+        
+        return result;
+    }
 
-    public void Delete(TKey id)
-        => Repository.Delete(id);
+    public virtual void Delete(TKey id)
+    {
+        Logger.LogInformation("Deleting {model} with id {id}", typeof(TModel).Name, id);
+        
+        Repository.Delete(id);
+        
+        Logger.LogInformation("{model} with id {id} deleted successfully", typeof(TModel).Name, id);
+    }
 }

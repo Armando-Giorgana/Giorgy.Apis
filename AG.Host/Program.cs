@@ -7,7 +7,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // builder.Services.AddHttpContextAccessor();
-
 builder.AddApis();
 
 var app = builder.Build();

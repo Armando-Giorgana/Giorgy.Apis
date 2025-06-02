@@ -5,7 +5,7 @@ namespace AG.Hotels.Front.Services.Extensions;
 
 public static class ServiceRegistrationExtensions
 {
-    public static IServiceCollection AddHotelFrontServices(this IServiceCollection services)
+    public static IServiceCollection AddHotelFrontServices(this IServiceCollection services) 
     {
         services.AddScoped<IHotelsService, HotelsService>();
         services.AddScoped<IRoomsService, RoomsService>();
