@@ -1,3 +1,4 @@
+using AG.Hotels.Front.Api.Endpoints;
 using AG.Hotels.Front.Services.Extensions;
 using AG.Repositories.SqlServer.Extensions;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +11,10 @@ public static class ServiceRegistrationExtensions
     {
         services.AddHotelFrontRepositories();
         services.AddHotelFrontServices();
+        
+        // Register endpoints
+        services.AddScoped<IHotelsEndpoint, HotelsEndpoint>();
+        services.AddScoped<IRoomsEndpoint, RoomsEndpoint>();
 
         return services;
     }

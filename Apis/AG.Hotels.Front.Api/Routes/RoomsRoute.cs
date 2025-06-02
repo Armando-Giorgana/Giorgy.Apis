@@ -1,5 +1,5 @@
+using AG.Hotels.Front.Api.Endpoints;
 using AG.Hotels.Front.Models;
-using AG.Hotels.Front.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,41 +12,41 @@ public static class RoomsRoute
     {
         var group = app.MapGroup($"{basePath}{path}");
         
-        group.MapGet("/", ([FromServices] IRoomsService service) =>
+        group.MapGet("/", ([FromServices] IRoomsEndpoint endpoint) =>
         {
-            var result = service.GeAll();
+            var result = endpoint.GetRooms();
             
             return Results.Ok(result);
         });
         
-        group.MapGet("/{id:long}", ([FromServices] IRoomsService service, long id) =>
+        group.MapGet("/{id:long}", ([FromServices] IRoomsEndpoint endpoint, long id) =>
         {
-            var result = service.GeById(id);
+            var result = endpoint.GetRoomById(id);
             
             return result is not null
                 ? Results.Ok(result) 
                 : Results.NotFound();
         });
         
-        group.MapPost("/", ([FromServices] IRoomsService service, [FromBody] RoomModel model) =>
+        group.MapPost("/", ([FromServices] IRoomsEndpoint endpoint, [FromBody] RoomModel model) =>
         {
-            var result = service.Create(model);
+            var result = endpoint.CreateRoom(model);
             
             return Results.Created($"{basePath}{path}/{result.Id}", result);
         });
         
-        group.MapPut("/{id:long}", ([FromServices] IRoomsService service, long id, [FromBody] RoomModel model) =>
+        group.MapPut("/{id:long}", ([FromServices] IRoomsEndpoint endpoint, long id, [FromBody] RoomModel model) =>
         {
             model.Id = id;
 
-            var result = service.Update(model);
+            var result = endpoint.UpdateRoom(id, model);
             
             return Results.Ok(result);
         });
         
-        group.MapDelete("/{id:long}", ([FromServices] IRoomsService service, long id) =>
+        group.MapDelete("/{id:long}", ([FromServices] IRoomsEndpoint endpoint, long id) =>
         {
-            service.Delete(id);
+            endpoint.DeleteRoom(id);
             
             return Results.NoContent();
         });

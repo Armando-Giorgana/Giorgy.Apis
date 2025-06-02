@@ -1,5 +1,4 @@
-using AG.Hotels.Front.Services.Extensions;
-using AG.Repositories.SqlServer.Extensions;
+using AG.Hotels.Front.Api.Extensions;
 
 namespace AG.Apis.Extensions;
 
@@ -8,8 +7,7 @@ public static class ServicesExtension
     public static IServiceCollection AddApis(this WebApplicationBuilder builder)
     {
         // Register APIs by Modules
-        builder.Services.AddHotelFrontRepositories();
-        builder.Services.AddHotelFrontServices();
+        builder.Services.AddHotelFrontApi();
         
         return builder.Services;
     }

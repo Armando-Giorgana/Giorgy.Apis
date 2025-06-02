@@ -4,8 +4,8 @@ public interface IBaseService<TKey, TModel>
     where TKey : struct
     where TModel : class
 {
-    TModel? GeById(TKey  id);
-    IList<TModel> GeAll();
+    TModel? GetById(TKey  id);
+    IList<TModel> GetAll();
     TModel Create(TModel model);
     TModel Update(TModel model);
     void Delete(TKey id);

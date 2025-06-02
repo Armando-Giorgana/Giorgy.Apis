@@ -12,10 +12,10 @@ public abstract class BaseService<TKey, TModel, TRepository>(
 {
     protected readonly TRepository Repository = repository;
     
-    public TModel? GeById(TKey id)
+    public TModel? GetById(TKey id)
         => Repository.GetById(id);
     
-    public IList<TModel> GeAll()
+    public IList<TModel> GetAll()
         => Repository.GetAll();
 
     public TModel Create(TModel model)

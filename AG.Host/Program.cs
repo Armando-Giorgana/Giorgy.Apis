@@ -1,5 +1,4 @@
 using AG.Apis.Extensions;
-using AG.Hotels.Front.Api.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +19,6 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
 });
 
-app.UseHotelFrontRoutes();
+app.UseApisRoutes();
 
 await app.RunAsync();

@@ -1,5 +1,5 @@
+using AG.Hotels.Front.Api.Endpoints;
 using AG.Hotels.Front.Models;
-using AG.Hotels.Front.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,41 +12,39 @@ public static class HotelsRoute
     {
         var group = app.MapGroup($"{basePath}{path}");
 
-        group.MapGet("/", ([FromServices] IHotelsService service) =>
+        group.MapGet("/", ([FromServices] IHotelsEndpoint endpoint) =>
         {
-            var result = service.GeAll();
+            var result = endpoint.GetHotels();
             
             return Results.Ok(result);
         });
         
-        group.MapGet("/{id:long}", ([FromServices] IHotelsService service, long id) =>
+        group.MapGet("/{id:long}", ([FromServices] IHotelsEndpoint endpoint, long id) =>
         {
-            var result = service.GeById(id);
+            var result = endpoint.GetHotelById(id);
             
             return result is not null
                 ? Results.Ok(result) 
                 : Results.NotFound();
         });
         
-        group.MapPost("/", ([FromServices] IHotelsService service, [FromBody] HotelModel model) =>
+        group.MapPost("/", ([FromServices] IHotelsEndpoint endpoint, [FromBody] HotelModel model) =>
         {
-            var result = service.Create(model);
+            var result = endpoint.CreateHotel(model);
             
             return Results.Created($"{basePath}{path}/{result.Id}", result);
         });
         
-        group.MapPut("/{id:long}", ([FromServices] IHotelsService service, long id, [FromBody] HotelModel model) =>
+        group.MapPut("/{id:long}", ([FromServices] IHotelsEndpoint endpoint, long id, [FromBody] HotelModel model) =>
         {
-            model.Id = id;
-
-            var result = service.Update(model);
+            var result = endpoint.UpdateHotel(id, model);
             
             return Results.Ok(result);
         });
         
-        group.MapDelete("/{id:long}", ([FromServices] IHotelsService service, long id) =>
+        group.MapDelete("/{id:long}", ([FromServices] IHotelsEndpoint endpoint, long id) =>
         {
-            service.Delete(id);
+            endpoint.DeleteHotel(id);
             
             return Results.NoContent();
         });
