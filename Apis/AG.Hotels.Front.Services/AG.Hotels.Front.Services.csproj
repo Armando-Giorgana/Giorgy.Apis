@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\AG.Hotels.Front.Repositories.SqlServer\AG.Hotels.Front.Repositories.SqlServer.csproj" />
+      <ProjectReference Include="..\AG.Hotels.Front.Services.Interfaces\AG.Hotels.Front.Services.Interfaces.csproj" />
+    </ItemGroup>
+
+</Project>
